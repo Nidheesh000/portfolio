@@ -1,0 +1,16 @@
+{
+  "name": "portfolio-root",
+  "version": "1.0.0",
+  "description": "MERN Stack Portfolio Root",
+  "main": "server/server.js",
+  "scripts": {
+    "install-all": "npm.cmd install && npm.cmd install --prefix client && npm.cmd install --prefix server",
+    "server": "npm.cmd start --prefix server",
+    "client": "npm.cmd run dev --prefix client",
+    "dev": "concurrently \"npm.cmd run server\" \"npm.cmd run client\"",
+    "seed": "node server/seed.js"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

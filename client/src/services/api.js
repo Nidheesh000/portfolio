@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 // Create custom Axios instance
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+
 const API = axios.create({
-  baseURL: '',
+  baseURL: API_BASE_URL,
 });
 
 // Interceptor to inject JWT token in header

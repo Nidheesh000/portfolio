@@ -6,10 +6,11 @@ const ProjectCard = ({ project }) => {
   const { title, description, image, technologies, githubLink, liveLink } = project;
 
   // Resolve image source: checks if local upload path or absolute web URL
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
   const imageSrc = image
     ? image.startsWith('http') || image.startsWith('data:')
       ? image
-      : `http://localhost:5000${image}`
+      : `${API_BASE_URL}${image}`
     : 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&auto=format&fit=crop&q=60'; // Default placeholder code screen
 
   return (

@@ -1,6 +1,11 @@
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
+const authAxios = axios.create({
+  baseURL: API_BASE_URL,
+});
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -23,7 +28,7 @@ export const AuthProvider = ({ children }) => {
             Authorization: `Bearer ${token}`,
           },
         };
-        const { data } = await axios.get('/api/auth/profile', config);
+        const { data } = await authAxios.get('/api/auth/profile', config);
         setAdmin(data);
       } catch (error) {
         console.error('Session expired or invalid token');
@@ -38,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      const { data } = await axios.post('/api/auth/login', { username, password });
+      const { data } = await authAxios.post('/api/auth/login', { username, password });
       localStorage.setItem('adminToken', data.token);
       setToken(data.token);
       setAdmin({ _id: data._id, username: data.username });
